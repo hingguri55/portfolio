@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커미션 포트폴리오</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link href="https://hangeul.pstatic.net/hangeul_static/css/aggro.css" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --bg-color: #ffffff;          
+            --border-color: #e2e8f0;      
+            --text-color: #1e293b;
+            --text-secondary: #64748b;
+            --accent-blue-light: #f0f7ff; 
+            --accent-blue-border: #bae6fd;
+            --window-title-color: #0f172a;
+        }
+
+        body { 
+            font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, sans-serif !important; 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            padding: 20px 20px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .wrapper {
+            width: 100%;
+            max-width: 1120px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .retro-window { 
+            width: 100%;
+            background: #ffffff; 
+            border: 1px solid var(--border-color); 
+            border-radius: 16px; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); 
+            overflow: hidden;
+        }
+        
+        .window-header {
+            background: var(--accent-blue-light);
+            border-bottom: 1px solid var(--border-color);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .window-title {
+            font-family: 'SBAggroB', 'Pretendard', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--window-title-color);
+            letter-spacing: -0.5px;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .win-btn {
+            width: 10px;
+            height: 10px;
+            background: #cbd5e1;
+            border-radius: 50%;
+        }
+
+        .window-body {
+            padding: 16px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 14px;
+            background: #ffffff;
+            align-items: start; 
+        }
+
+        @media (max-width: 850px) {
+            .window-body { grid-template-columns: 1fr; }
+        }
+
+        .left-panel {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            height: 360px; 
+            overflow: hidden;
+        }
+
+        .tab-menu-wrapper {
+            position: sticky;
+            top: 0;
+            background: #ffffff;
+            padding: 12px 12px 8px 12px;
+            z-index: 20;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .tab-menu { 
+            display: flex; 
+            gap: 6px; 
+        }
+
+        .tab-btn { 
+            flex: 1;
+            padding: 7px 6px; 
+            border-radius: 8px; 
+            border: 1px solid var(--border-color); 
+            background: #ffffff; 
+            font-family: 'SBAggroB', 'Pretendard', sans-serif;
+            font-size: 12px; 
+            font-weight: 700;
+            cursor: pointer; 
+            transition: all 0.2s; 
+            color: var(--text-secondary); 
+            text-align: center;
+        }
+        .tab-btn:hover { 
+            background: var(--accent-blue-light); 
+            color: var(--window-title-color); 
+            border-color: var(--accent-blue-border);
+        }
+        .tab-btn.active { 
+            background: var(--accent-blue-light); 
+            color: var(--window-title-color); 
+            border-color: var(--accent-blue-border); 
+            box-shadow: 0 2px 6px rgba(186, 230, 253, 0.3);
+        }
+
+        .file-list-scroll {
+            padding: 8px 12px 12px 12px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex: 1;
+        }
+
+        .file-list-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .file-list-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 2px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 10px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            flex-shrink: 0;
+        }
+        .file-item:hover { 
+            background: var(--accent-blue-light); 
+            border-color: var(--accent-blue-border); 
+        }
+        .file-item.active { 
+            background: var(--accent-blue-light); 
+            border-color: var(--accent-blue-border); 
+        }
+        
+        .file-item img {
+            width: 32px;
+            height: 32px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        .file-info {
+            font-family: 'SBAggroB', 'Pretendard', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-color);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+            line-height: 1.3;
+            letter-spacing: -0.3px;
+        }
+        .file-info span {
+            display: block;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-top: 1px;
+        }
+
+        .right-panel {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            height: 360px; 
+        }
+
+        .detail-display-area { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 8px; 
+            width: 100%;
+            height: 100%;
+        }
+
+        .section-label {
+            font-family: 'SBAggroB', 'Pretendard', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--window-title-color);
+            background: var(--accent-blue-light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px 14px;
+            flex-shrink: 0;
+            letter-spacing: -0.3px;
+            text-align: center;
+        }
+
+        .unified-viewer-box {
+            background: #ffffff;
+            border: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .dual-media-preview {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            min-height: 0;
+        }
+
+        .dual-item {
+            background: #ffffff; 
+            border: none;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            gap: 2px;
+            overflow: hidden;
+            position: relative;
+            padding: 0;
+            height: 100%;
+            min-height: 0;
+            transform: translateZ(0);
+        }
+
+        .dual-item img, .dual-item video {
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .dual-item img:hover, .dual-item video:hover {
+            transform: scale(1.03);
+        }
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .image-modal.active {
+            display: flex;
+        }
+
+        .modal-content-wrapper {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+            max-width: 96vw;
+            max-height: 96vh;
+        }
+
+        .modal-image, .modal-video {
+            width: auto;
+            height: auto;
+            max-width: 94vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-close-btn {
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            font-family: 'Pretendard', sans-serif;
+            font-size: 13px;
+            font-weight: 400;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+        .modal-close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: scale(1.08);
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="retro-window">
+        <div class="window-header">
+            <div class="window-title">포트폴리오</div>
+            <div class="window-controls">
+                <div class="win-btn"></div>
+                <div class="win-btn"></div>
+                <div class="win-btn"></div>
+            </div>
+        </div>
+
+        <div class="window-body">
+            <div class="left-panel">
+                <div class="tab-menu-wrapper">
+                    <div class="tab-menu">
+                        <button class="tab-btn active" onclick="filterCategory('all', this)">전체</button>
+                        <button class="tab-btn" onclick="filterCategory('female', this)">여캐</button>
+                        <button class="tab-btn" onclick="filterCategory('male', this)">남캐</button>
+                    </div>
+                </div>
+
+                <div class="file-list-scroll" id="fileListContainer">
+                    <div class="file-item" data-category="female" onclick="updateView('요코링님', this)">
+                        <img data-badge="SOOP" alt="썸">
+                        <div class="file-info">요코링님 <span>Warudo</span></div>
+                    </div>
+                    <div class="file-item" data-category="female" onclick="updateView('송워량님', this)">
+                        <img data-badge="Chzzk" alt="썸">
+                        <div class="file-info">송워량님 <span>VSF</span></div>
+                    </div>
+                    <div class="file-item" data-category="female" onclick="updateView('챠코야님', this)">
+                        <img data-badge="Chzzk" alt="썸">
+                        <div class="file-info">챠코야님 <span>VSF</span></div>
+                    </div>
+                    <div class="file-item" data-category="female" onclick="updateView('요*님', this)">
+                        <img data-badge="Chzzk" alt="썸">
+                        <div class="file-info">요*님 <span>VSF</span></div>
+                    </div>
+                    <div class="file-item" data-category="female" onclick="updateView('단망찌님', this)">
+                        <img data-badge="Chzzk" alt="썸">
+                        <div class="file-info">단망찌님 <span>VSF</span></div>
+                    </div>
+
+                    <div class="file-item" data-category="male" onclick="updateView('루르님', this)">
+                        <img data-badge="Chzzk" alt="썸">
+                        <div class="file-info">루르님 <span>VSF</span></div>
+                    </div>
+                    <div class="file-item" data-category="male" onclick="updateView('태호님', this)">
+                        <img data-badge="Chzzk" alt="썸">
+                        <div class="file-info">태호님 <span>VSF</span></div>
+                    </div>
+                    <div class="file-item" data-category="male" onclick="updateView('테*님', this)">
+                        <img data-badge="Chzzk" alt="썸">
+                        <div class="file-info">테*님 <span>VSF</span></div>
+                    </div>
+                    <div class="file-item" data-category="male" onclick="updateView('하***님', this)">
+                        <img data-badge="Chzzk" alt="썸">
+                        <div class="file-info">하***님 <span>Warudo</span></div>
+                    </div>
+                    <div class="file-item" data-category="male" onclick="updateView('르*님', this)">
+                        <img data-badge="Chzzk" alt="썸">
+                        <div class="file-info">르*님 <span>Warudo</span></div>
+                    </div>
+                    <div class="file-item" data-category="male" onclick="updateView('만*님', this)">
+                        <img data-badge="Chzzk" alt="썸">
+                        <div class="file-info">만*님 <span>Warudo</span></div>
+                    </div>
+                    <div class="file-item" data-category="male" onclick="updateView('쿠*님', this)">
+                        <img data-badge="Chzzk" alt="썸">
+                        <div class="file-info">쿠*님 <span>VSF</span></div>
+                    </div>
+                    <div class="file-item" data-category="male" onclick="updateView('이누형님', this)">
+                        <img data-badge="Chzzk" alt="썸">
+                        <div class="file-info">이누형님 <span>VSF</span></div>
+                    </div>
+                    <div class="file-item" data-category="male" onclick="updateView('위**님', this)">
+                        <img data-badge="SOOP" alt="썸">
+                        <div class="file-info">위**님 <span>Warudo</span></div>
+                    </div>
+                    <div class="file-item" data-category="male" onclick="updateView('해*님', this)">
+                        <img data-badge="Chzzk" alt="썸">
+                        <div class="file-info">해*님 <span>VSF</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="detail-display-area">
+                    <div class="section-label" id="detailTitle">선택된 항목</div>
+                    <div class="unified-viewer-box">
+                        <div class="media-preview" id="mediaViewer" style="height:100%;">
+                            선택된 항목의 상세 영역입니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="image-modal" id="imageModal" onclick="closeModal()">
+    <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+        <button class="modal-close-btn" onclick="closeModal()">✕</button>
+        <div id="modalMediaContainer" style="display:flex; justify-content:center; align-items:center;"></div>
+    </div>
+</div>
+
+<script>
+    window.setTextBadge = function(imgElement, text) {
+        const bgColor = text === 'SOOP' ? '%23e0f2fe' : '%23ecfdf5';
+        const textColor = text === 'SOOP' ? '%230284c7' : '%23059669';
+        imgElement.src = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><rect width='100%' height='100%' rx='6' fill='${bgColor}'/><text x='50%' y='50%' font-size='8' font-weight='800' dominant-baseline='middle' text-anchor='middle' fill='${textColor}' font-family='sans-serif'>${text}</text></svg>`;
+    };
+
+    function sortFileList() {
+        const container = document.getElementById('fileListContainer');
+        const items = Array.from(container.getElementsByClassName('file-item'));
+
+        items.sort((a, b) => {
+            const nameA = a.querySelector('.file-info').firstChild.textContent.trim();
+            const nameB = b.querySelector('.file-info').firstChild.textContent.trim();
+            return nameA.localeCompare(nameB, 'ko');
+        });
+
+        items.forEach(item => container.appendChild(item));
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll('.file-item img').forEach(img => {
+            const badgeType = img.getAttribute('data-badge');
+            if (badgeType) {
+                setTextBadge(img, badgeType);
+            }
+        });
+
+        sortFileList();
+
+        const firstVisibleItem = document.querySelector('.file-item');
+        if (firstVisibleItem) {
+            firstVisibleItem.click();
+        }
+    });
+
+    function filterCategory(category, btnElement) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        btnElement.classList.add('active');
+
+        const items = document.querySelectorAll('.file-item');
+        
+        items.forEach(item => {
+            const itemCat = item.getAttribute('data-category');
+            if (category === 'all' || itemCat === category) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        if (category === 'all') {
+            sortFileList();
+        }
+
+        const firstVisible = Array.from(items).find(item => item.style.display !== 'none');
+        if (firstVisible) {
+            firstVisible.click();
+        }
+    }
+
+    function openModal(mediaSrc, type) {
+        const modal = document.getElementById('imageModal');
+        const container = document.getElementById('modalMediaContainer');
+        
+        if (type === 'img') {
+            container.innerHTML = `<img src="${mediaSrc}" class="modal-image" alt="확대 이미지">`;
+        } else if (type === 'video') {
+            container.innerHTML = `<video src="${mediaSrc}" class="modal-video" autoplay controls loop playsinline></video>`;
+        }
+        
+        modal.classList.add('active');
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('imageModal');
+        const container = document.getElementById('modalMediaContainer');
+        modal.classList.remove('active');
+        container.innerHTML = '';
+    }
+
+    function updateView(title, element) {
+        document.getElementById('detailTitle').innerText = title;
+        const mediaViewer = document.getElementById('mediaViewer');
+
+        if (title === '요코링님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549377598587674695/316fe3510a3c10e7.png?ex=6aab2295&is=6aa9d115&hm=515391ab799c9fb00a4025d95a25f7bb6734f6d6956c23949754ebc78aec7d45&";
+            const modalImg = "https://cdn.discordapp.com/attachments/1301188250760777728/1549599579517755472/2.png?ex=6aab4891&is=6aa9f711&hm=8656d4b455f0f6121c1cc3f561b77ddf98c60bdb3c8f7929ff78a3e067a30519&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549377588315561984/d5446f0d16894bae.mp4?ex=6aab2293&is=6aa9d113&hm=97f5b24068b958903fe28c79d8d00afd2de61ad09de0d3865b3870e09d9ead98&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" onclick="openModal('${modalImg}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '루르님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549328932094877736/739c8130fa0c8b3e.png?ex=6aaaf542&is=6aa9a3c2&hm=db35545a7bb53104ce8db64d840a8c8081891f3d86cb4eb82e3ed15d6d465b9f&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549328063362236487/ddbcf170ec367357.mp4?ex=6aaaf473&is=6aa9a2f3&hm=c68ec582dd0d667bed3a98c753aba1251157c829a4dd5cb40e2a56ccb354f2e1&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '태호님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549357691032571914/b51ce709408e7ef6.png?ex=6aab100b&is=6aa9be8b&hm=0ef3901f14f32645971be5af1123beaef7cbba07e8c5406480476e514723029e&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549357719604043856/bd877e2836d41bd9.mp4?ex=6aab1012&is=6aa9be92&hm=d48ae1a7f18e856deb8f7e60446eec6ae23877594e65db1856c83a140234b087&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '테*님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549359518171926548/1bb5bbf0ae470ee2.png?ex=6aab11be&is=6aa9c03e&hm=5973029e9f94c20f2d1e31966bc53c9435d78f0de67e0632b54b80f071670717&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549359501415546880/423dc2e145843a85.mp4?ex=6aab11ba&is=6aa9c03a&hm=9741c90411fd52e23ba8c366283bf0ebb61d5cb2fe7e1baaa195b2bdae842ee4&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '하***님') {
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item">이미지 준비 중</div><div class="dual-item">영상 준비 중</div></div>`;
+        } else if (title === '르*님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549594844744126524/1.png?ex=6aab4429&is=6aa9f2a9&hm=49937d616716a687f5ca1e79015cecc366d3dca63e2a20813a7216f9ecdddd4c&";
+            const modalImg = "https://cdn.discordapp.com/attachments/1301188250760777728/1549594858841317477/2.png?ex=6aab442c&is=6aa9f2ac&hm=f7e60be7cbfc6acf351594a11170b3d913d03ec92c103f21c80d94aef33c64ee&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549594931247718410/65e0f74c4811da66.mp4?ex=6aab443d&is=6aa9f2bd&hm=379df2f911f1ab1d5e8e0cb34708b078bd58e6211f3224059b2b3944c37b4a5c&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" onclick="openModal('${modalImg}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '만*님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549603342877982791/1.png?ex=6aab4c13&is=6aa9fa93&hm=b131ba20fa072827a1f380ae68f4128dd465e4583e6b0eec8e950d4067029f45&";
+            const modalImg = "https://cdn.discordapp.com/attachments/1301188250760777728/1549601304094187610/2.png?ex=6aab4a2d&is=6aa9f8ad&hm=6377a78b3e5d25857be494352c3162e6799d66e45461bf00697bea9de67390b0&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549602763330027621/53ae4033d3b5fd40.mp4?ex=6aab4b89&is=6aa9fa09&hm=388fdd681ee7916f8a282f754ba86724bc3bef998a52148befe5d22f5ce7260d&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" onclick="openModal('${modalImg}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '위**님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549384878783594546/1.png?ex=6aab295d&is=6aa9d7dd&hm=480cba262eea5bba384e7963b869d5d4e0321f8859dd02a1c1a858c213b31638&";
+            const modalImg = "https://cdn.discordapp.com/attachments/1301188250760777728/1549384494669373470/2.png?ex=6aab2901&is=6aa9d781&hm=7945a3e426f6ded8f80d8fdbd5b9f5888f2918e8c6e30a6194fe9ca96cd97271&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549385635926646784/f07c45a29ad9fc93.mp4?ex=6aab2a11&is=6aa9d891&hm=b93e22051768eefb5c5ccf3ea8b7483885e03f8ef99d4296bb3b3cbab83ce403&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" onclick="openModal('${modalImg}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '쿠*님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549285922913128488/b820a9153fc23cbc.png?ex=6aaacd34&is=6aa97bb4&hm=7ce007461de0bc1e72117d13fc2fbc1e7ef67aaf8ac086ae53f0339aab112952&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549284741663162439/d8121ac8314871cd.mp4?ex=6aaacc1a&is=6aa97a9a&hm=71686e31b06debc2dea45ac7d3bd4e4c841216481d5bb2a7fe14d12054e01c2d&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '이누형님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549286680656216064/104290585548406e.png?ex=6aaacde9&is=6aa97c69&hm=cb56e0ba4d7c0a4b5fae7a654531a62a69a360f89f78d2816edf6d05271bbcd1&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549286698498916382/34dd1f912e0d3033.mp4?ex=6aaacded&is=6aa97c6d&hm=da35a8587499a145b075a4d8486af849983871d524dd67309b565da8e332a70e&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '해*님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549288784217120828/11739e292c787058.png?ex=6aaacfde&is=6aa97e5e&hm=fee474dd7eac84b8709a9eeb1feb1655bf6195801cf9862d2b5c41b0ca1040d7&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549288801690718218/83404166d7d79be3.mp4?ex=6aaacfe2&is=6aa97e62&hm=8793d48d1e5d34a67d829f05b0ddcebef798cef81386454348f0cdb8e80f9828&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '송워량님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549261621577384006/dfea00c69fdc5d8a.png?ex=6aaab692&is=6aa96512&hm=fd8dae6f5815c92a41e9bc102f949c3c7f08638a4849280da6fe8156d58f620d&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549261639889715350/9703cda8e41987a2.mp4?ex=6aaab696&is=6aa96516&hm=4fd9aae1b971dc738439390b6d5de2a10ea0c28b20e36af5014a34ae3c1782de&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="송워량님 이미지" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '단망찌님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549099810936856616/Untitled-1.png?ex=6aaac89f&is=6aa9771f&hm=36db12e79ea7484435cb72d6eba502b361a4606241c9511add68399e806a72a9&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549099534989131816/94acbb73c2042a21.mp4?ex=6aaac85e&is=6aa976de&hm=7f3642536ae76322108a12045778150bc995d2d02ae5908143ef95924c2e1afa&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="단망찌님 이미지" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '챠코야님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549255836365234297/Untitled-2.png?ex=6aaab12f&is=6aa95faf&hm=d98c97922cfa5b750f7e1b45425e09a5671c3496f87b9d67575dda97a2cc0857&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549255856246366228/0a297779cf1f0919.mp4?ex=6aaab133&is=6aa95fb3&hm=48cd54a2a9af76f72561e08e639217bbbfce1b949e8bdf0f916d6c144ac65802&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="챠코야님 이미지" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '요*님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549259392845615145/fe55329e7752e7b4.png?ex=6aaab47f&is=6aa962ff&hm=579967e57c07e639d6f61355821cce4405782800cb6cbe1aac6896918a3366dd&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549259289275801670/3dfe6f24f7ecda37.mp4?ex=6aaab466&is=6aa962e6&hm=8f8f56bbebabb1a858b28ad24ec0cd9cffc8eb8aea9672bcd6b6fd01bbe59229&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="요*님 이미지" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        }
+    }
+</script>
+
+</body>
+</html>
