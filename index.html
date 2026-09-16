@@ -80,13 +80,12 @@
         .window-body {
             padding: 12px;
             display: grid;
-            grid-template-columns: 260px 1fr; /* PC 기본 레이아웃 */
+            grid-template-columns: 260px 1fr;
             gap: 12px;
             background: #ffffff;
             align-items: start; 
         }
 
-        /* 💡 PC 레이아웃 고정 높이 */
         .left-panel {
             background: #ffffff;
             border: 1px solid var(--border-color);
@@ -105,25 +104,6 @@
             display: flex;
             flex-direction: column;
             height: 330px;
-        }
-
-        /* 💡 모바일 화면(768px 이하)에서만 세로형태로 변경되도록 분기 */
-        @media (max-width: 768px) {
-            body { padding: 4px; align-items: flex-start; }
-            .window-body { 
-                grid-template-columns: 1fr; 
-                gap: 8px;
-                padding: 10px;
-            }
-            .left-panel {
-                height: 200px !important;
-            }
-            .right-panel {
-                height: 340px !important;
-            }
-            .dual-media-preview {
-                grid-template-columns: 1fr !important; /* 모바일은 미디어 위아래 배치 */
-            }
         }
 
         .tab-menu-wrapper {
@@ -251,7 +231,7 @@
             width: 100%;
             height: 100%;
             display: grid;
-            grid-template-columns: 1fr 1fr; /* PC에서는 좌우 나란히 배치 */
+            grid-template-columns: 1fr 1fr;
             gap: 8px;
             min-height: 0;
         }
