@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>커미션 포트폴리오</title>
+    <!-- 프리텐다드 폰트 (본문용) -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <!-- 넥슨 배운서체 / 어그로체 웹폰트 -->
     <link href="https://hangeul.pstatic.net/hangeul_static/css/aggro.css" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,12 +25,12 @@
             font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, sans-serif !important; 
             background-color: var(--bg-color); 
             color: var(--text-color); 
-            padding: 8px 12px;
+            padding: 4px;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
-            position: relative; /* 모달 기준점 설정 */
+            position: relative;
         }
         
         .wrapper {
@@ -36,14 +38,13 @@
             max-width: 1120px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
         }
 
         .retro-window { 
             width: 100%;
             background: #ffffff; 
             border: 1px solid var(--border-color); 
-            border-radius: 14px; 
+            border-radius: 12px; 
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); 
             overflow: hidden;
         }
@@ -51,7 +52,7 @@
         .window-header {
             background: var(--accent-blue-light);
             border-bottom: 1px solid var(--border-color);
-            padding: 10px 20px;
+            padding: 8px 14px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -59,7 +60,7 @@
 
         .window-title {
             font-family: 'SBAggroB', 'Pretendard', sans-serif;
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 700;
             color: var(--window-title-color);
             letter-spacing: -0.5px;
@@ -67,36 +68,50 @@
 
         .window-controls {
             display: flex;
-            gap: 6px;
+            gap: 5px;
             align-items: center;
         }
         .win-btn {
-            width: 9px;
-            height: 9px;
+            width: 7px;
+            height: 7px;
             background: #cbd5e1;
             border-radius: 50%;
         }
 
         .window-body {
-            padding: 12px;
+            padding: 10px;
             display: grid;
-            grid-template-columns: 260px 1fr;
+            grid-template-columns: 240px 1fr;
             gap: 10px;
             background: #ffffff;
             align-items: start; 
         }
 
-        @media (max-width: 850px) {
-            .window-body { grid-template-columns: 1fr; }
+        /* 💡 모바일 화면 대응 (너비 768px 이하) */
+        @media (max-width: 768px) {
+            .window-body { 
+                grid-template-columns: 1fr; 
+                gap: 8px;
+            }
+            .left-panel {
+                height: 180px !important; /* 모바일에서는 목록창 높이를 줄임 */
+            }
+            .right-panel {
+                height: 320px !important; /* 모바일 상세창 높이 고정 */
+            }
+            .dual-media-preview {
+                grid-template-columns: 1fr !important; /* 모바일에서는미디어를 위아래로 배치해 잘림 방지 */
+                gap: 6px !important;
+            }
         }
 
         .left-panel {
             background: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
-            height: 310px;
+            height: 290px;
             overflow: hidden;
         }
 
@@ -104,53 +119,47 @@
             position: sticky;
             top: 0;
             background: #ffffff;
-            padding: 10px 10px 6px 10px;
+            padding: 8px 8px 4px 8px;
             z-index: 20;
             border-bottom: 1px solid #f1f5f9;
         }
 
         .tab-menu { 
             display: flex; 
-            gap: 6px; 
+            gap: 4px; 
         }
 
         .tab-btn { 
             flex: 1;
-            padding: 6px 4px; 
-            border-radius: 7px; 
+            padding: 5px 2px; 
+            border-radius: 6px; 
             border: 1px solid var(--border-color); 
             background: #ffffff; 
             font-family: 'SBAggroB', 'Pretendard', sans-serif;
             font-size: 11px; 
             font-weight: 700;
             cursor: pointer; 
-            transition: all 0.2s; 
             color: var(--text-secondary); 
             text-align: center;
         }
-        .tab-btn:hover { 
+        .tab-btn:hover, .tab-btn.active { 
             background: var(--accent-blue-light); 
             color: var(--window-title-color); 
             border-color: var(--accent-blue-border);
-        }
-        .tab-btn.active { 
-            background: var(--accent-blue-light); 
-            color: var(--window-title-color); 
-            border-color: var(--accent-blue-border); 
             box-shadow: 0 2px 6px rgba(186, 230, 253, 0.3);
         }
 
         .file-list-scroll {
-            padding: 6px 10px 10px 10px;
+            padding: 6px 8px 8px 8px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 4px;
             flex: 1;
         }
 
         .file-list-scroll::-webkit-scrollbar {
-            width: 4px;
+            width: 3px;
         }
         .file-list-scroll::-webkit-scrollbar-thumb {
             background: #cbd5e1;
@@ -161,28 +170,23 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 6px 8px;
+            padding: 5px 6px;
             background: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 7px;
+            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.15s ease;
             flex-shrink: 0;
         }
-        .file-item:hover { 
-            background: var(--accent-blue-light); 
-            border-color: var(--accent-blue-border); 
-        }
-        .file-item.active { 
+        .file-item:hover, .file-item.active { 
             background: var(--accent-blue-light); 
             border-color: var(--accent-blue-border); 
         }
         
         .file-item img {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             object-fit: cover;
-            border-radius: 5px;
+            border-radius: 4px;
             border: 1px solid var(--border-color);
             flex-shrink: 0;
         }
@@ -195,8 +199,7 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             width: 100%;
-            line-height: 1.3;
-            letter-spacing: -0.3px;
+            line-height: 1.2;
         }
         .file-info span {
             display: block;
@@ -204,17 +207,16 @@
             font-size: 9px;
             font-weight: 500;
             color: var(--text-secondary);
-            margin-top: 1px;
         }
 
         .right-panel {
             background: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 10px;
+            border-radius: 8px;
+            padding: 8px;
             display: flex;
             flex-direction: column;
-            height: 310px;
+            height: 290px;
         }
 
         .detail-display-area { 
@@ -227,15 +229,14 @@
 
         .section-label {
             font-family: 'SBAggroB', 'Pretendard', sans-serif;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--window-title-color);
             background: var(--accent-blue-light);
             border: 1px solid var(--border-color);
-            border-radius: 7px;
-            padding: 6px 12px;
+            border-radius: 6px;
+            padding: 5px 10px;
             flex-shrink: 0;
-            letter-spacing: -0.3px;
             text-align: center;
         }
 
@@ -259,42 +260,30 @@
         }
 
         .dual-item {
-            background: #ffffff; 
-            border: none;
-            border-radius: 10px;
+            background: #f8fafc; 
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             font-family: 'Pretendard', sans-serif;
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-secondary);
-            font-weight: 500;
             overflow: hidden;
             position: relative;
-            padding: 0;
             height: 100%;
             min-height: 0;
-            transform: translateZ(0);
         }
 
         .dual-item img, .dual-item video {
             width: 100%;
             height: 100%;
-            max-width: 100%;
-            max-height: 100%;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 7px;
             cursor: pointer;
-            transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
-            -webkit-font-smoothing: antialiased;
-        }
-        
-        .dual-item img:hover, .dual-item video:hover {
-            transform: scale(1.02);
         }
 
-        /* 💡 수정된 모달 스타일: iframe 내부 전체를 딱 맞게 덮도록 변경 */
         .image-modal {
             display: none;
             position: absolute;
@@ -309,11 +298,7 @@
             align-items: center;
             padding: 10px;
         }
-
-        .image-modal.active {
-            display: flex;
-        }
-
+        .image-modal.active { display: flex; }
         .modal-content-wrapper {
             position: relative;
             display: flex;
@@ -323,35 +308,24 @@
             max-width: 95%;
             max-height: 95%;
         }
-
         .modal-image, .modal-video {
-            width: auto;
-            height: auto;
             max-width: 100%;
-            max-height: 280px; /* 위젯 크기에 맞게 조절 */
+            max-height: 250px;
             object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 6px;
         }
-
         .modal-close-btn {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: #ffffff;
-            font-family: 'Pretendard', sans-serif;
-            font-size: 11px;
+            font-size: 10px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             border-radius: 50%;
-            transition: all 0.2s ease;
-        }
-        .modal-close-btn:hover {
-            background: rgba(255, 255, 255, 0.35);
-            transform: scale(1.08);
         }
     </style>
 </head>
@@ -567,7 +541,7 @@
             const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549359501415546880/423dc2e145843a85.mp4?ex=6aab11ba&is=6aa9c03a&hm=9741c90411fd52e23ba8c366283bf0ebb61d5cb2fe7e1baaa195b2bdae842ee4&";
             mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
         } else if (title === '하***님') {
-            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item">이미지 준비 중</div><div class="dual-item">영상 준비 중</div></div>`;
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item" style="justify-content:center;">이미지 준비 중</div><div class="dual-item" style="justify-content:center;">영상 준비 중</div></div>`;
         } else if (title === '르*님') {
             const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549594844744126524/1.png?ex=6aab4429&is=6aa9f2a9&hm=49937d616716a687f5ca1e79015cecc366d3dca63e2a20813a7216f9ecdddd4c&";
             const modalImg = "https://cdn.discordapp.com/attachments/1301188250760777728/1549594858841317477/2.png?ex=6aab442c&is=6aa9f2ac&hm=f7e60be7cbfc6acf351594a11170b3d913d03ec92c103f21c80d94aef33c64ee&";
