@@ -23,11 +23,12 @@
             font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, sans-serif !important; 
             background-color: var(--bg-color); 
             color: var(--text-color); 
-            padding: 20px 20px; 
+            padding: 8px 12px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            position: relative; /* 모달 기준점 설정 */
         }
         
         .wrapper {
@@ -35,14 +36,14 @@
             max-width: 1120px;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 10px;
         }
 
         .retro-window { 
             width: 100%;
             background: #ffffff; 
             border: 1px solid var(--border-color); 
-            border-radius: 16px; 
+            border-radius: 14px; 
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); 
             overflow: hidden;
         }
@@ -50,7 +51,7 @@
         .window-header {
             background: var(--accent-blue-light);
             border-bottom: 1px solid var(--border-color);
-            padding: 14px 24px;
+            padding: 10px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -58,7 +59,7 @@
 
         .window-title {
             font-family: 'SBAggroB', 'Pretendard', sans-serif;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             color: var(--window-title-color);
             letter-spacing: -0.5px;
@@ -70,17 +71,17 @@
             align-items: center;
         }
         .win-btn {
-            width: 10px;
-            height: 10px;
+            width: 9px;
+            height: 9px;
             background: #cbd5e1;
             border-radius: 50%;
         }
 
         .window-body {
-            padding: 16px;
+            padding: 12px;
             display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 14px;
+            grid-template-columns: 260px 1fr;
+            gap: 10px;
             background: #ffffff;
             align-items: start; 
         }
@@ -92,10 +93,10 @@
         .left-panel {
             background: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
-            height: 360px; 
+            height: 310px;
             overflow: hidden;
         }
 
@@ -103,7 +104,7 @@
             position: sticky;
             top: 0;
             background: #ffffff;
-            padding: 12px 12px 8px 12px;
+            padding: 10px 10px 6px 10px;
             z-index: 20;
             border-bottom: 1px solid #f1f5f9;
         }
@@ -115,12 +116,12 @@
 
         .tab-btn { 
             flex: 1;
-            padding: 7px 6px; 
-            border-radius: 8px; 
+            padding: 6px 4px; 
+            border-radius: 7px; 
             border: 1px solid var(--border-color); 
             background: #ffffff; 
             font-family: 'SBAggroB', 'Pretendard', sans-serif;
-            font-size: 12px; 
+            font-size: 11px; 
             font-weight: 700;
             cursor: pointer; 
             transition: all 0.2s; 
@@ -140,11 +141,11 @@
         }
 
         .file-list-scroll {
-            padding: 8px 12px 12px 12px;
+            padding: 6px 10px 10px 10px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
             flex: 1;
         }
 
@@ -159,11 +160,11 @@
         .file-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 7px 10px;
+            gap: 8px;
+            padding: 6px 8px;
             background: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 7px;
             cursor: pointer;
             transition: all 0.15s ease;
             flex-shrink: 0;
@@ -178,16 +179,16 @@
         }
         
         .file-item img {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             object-fit: cover;
-            border-radius: 6px;
+            border-radius: 5px;
             border: 1px solid var(--border-color);
             flex-shrink: 0;
         }
         .file-info {
             font-family: 'SBAggroB', 'Pretendard', sans-serif;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--text-color);
             overflow: hidden;
@@ -200,7 +201,7 @@
         .file-info span {
             display: block;
             font-family: 'Pretendard', sans-serif;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 500;
             color: var(--text-secondary);
             margin-top: 1px;
@@ -209,30 +210,30 @@
         .right-panel {
             background: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 12px;
+            border-radius: 10px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
-            height: 360px; 
+            height: 310px;
         }
 
         .detail-display-area { 
             display: flex; 
             flex-direction: column; 
-            gap: 8px; 
+            gap: 6px; 
             width: 100%;
             height: 100%;
         }
 
         .section-label {
             font-family: 'SBAggroB', 'Pretendard', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             color: var(--window-title-color);
             background: var(--accent-blue-light);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 8px 14px;
+            border-radius: 7px;
+            padding: 6px 12px;
             flex-shrink: 0;
             letter-spacing: -0.3px;
             text-align: center;
@@ -253,23 +254,22 @@
             height: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 6px;
             min-height: 0;
         }
 
         .dual-item {
             background: #ffffff; 
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             font-family: 'Pretendard', sans-serif;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-secondary);
             font-weight: 500;
-            gap: 2px;
             overflow: hidden;
             position: relative;
             padding: 0;
@@ -284,19 +284,20 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: cover;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
             transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
             -webkit-font-smoothing: antialiased;
         }
         
         .dual-item img:hover, .dual-item video:hover {
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
 
+        /* 💡 수정된 모달 스타일: iframe 내부 전체를 딱 맞게 덮도록 변경 */
         .image-modal {
             display: none;
-            position: fixed;
+            position: absolute;
             z-index: 1000;
             left: 0;
             top: 0;
@@ -306,7 +307,7 @@
             backdrop-filter: blur(4px);
             justify-content: center;
             align-items: center;
-            padding: 15px;
+            padding: 10px;
         }
 
         .image-modal.active {
@@ -318,30 +319,29 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 8px;
-            max-width: 96vw;
-            max-height: 96vh;
+            gap: 6px;
+            max-width: 95%;
+            max-height: 95%;
         }
 
         .modal-image, .modal-video {
             width: auto;
             height: auto;
-            max-width: 94vw;
-            max-height: 90vh;
+            max-width: 100%;
+            max-height: 280px; /* 위젯 크기에 맞게 조절 */
             object-fit: contain;
             border-radius: 8px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
         }
 
         .modal-close-btn {
-            width: 28px;
-            height: 28px;
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: #ffffff;
             font-family: 'Pretendard', sans-serif;
-            font-size: 13px;
-            font-weight: 400;
+            font-size: 11px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -350,8 +350,7 @@
             transition: all 0.2s ease;
         }
         .modal-close-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.35);
             transform: scale(1.08);
         }
     </style>
@@ -456,12 +455,12 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="image-modal" id="imageModal" onclick="closeModal()">
-    <div class="modal-content-wrapper" onclick="event.stopPropagation()">
-        <button class="modal-close-btn" onclick="closeModal()">✕</button>
-        <div id="modalMediaContainer" style="display:flex; justify-content:center; align-items:center;"></div>
+    
+    <div class="image-modal" id="imageModal" onclick="closeModal()">
+        <div class="modal-content-wrapper" onclick="event.stopPropagation()">
+            <button class="modal-close-btn" onclick="closeModal()">✕</button>
+            <div id="modalMediaContainer" style="display:flex; justify-content:center; align-items:center;"></div>
+        </div>
     </div>
 </div>
 
