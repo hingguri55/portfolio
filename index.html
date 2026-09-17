@@ -531,9 +531,9 @@
         const container = document.getElementById('modalMediaContainer');
         
         if (type === 'img') {
-            container.innerHTML = `<img src="${mediaSrc}" class="modal-image" alt="확대 이미지">`;
+            container.innerHTML = `<img src="${mediaSrc}" class="modal-image" alt="확대 이미지" referrerpolicy="no-referrer">`;
         } else if (type === 'video') {
-            container.innerHTML = `<video src="${mediaSrc}" class="modal-video" autoplay controls loop playsinline></video>`;
+            container.innerHTML = `<video src="${mediaSrc}" class="modal-video" autoplay controls loop playsinline referrerpolicy="no-referrer"></video>`;
         }
         
         modal.classList.add('active');
@@ -546,93 +546,73 @@
         container.innerHTML = '';
     }
 
-    // 💡 [안내] 깃허브에 올린 폴더 경로에 맞춰 아래 주소들을 수정해 주세요!
-    // 예시: 이미지를 images 폴더 안에 넣었다면 "images/yokoring_1.png" 형태로 적어주시면 됩니다.
-    const portfolioData = {
-        '요코링님': {
-            img1: "images/yokoring_1.png",
-            modalImg: "images/yokoring_2.png",
-            video: "videos/yokoring.mp4"
-        },
-        '루르님': {
-            img1: "images/ruru_1.png",
-            video: "videos/ruru.mp4"
-        },
-        '태호님': {
-            img1: "images/taeho_1.png",
-            video: "videos/taeho.mp4"
-        },
-        '테*님': {
-            img1: "images/te_1.png",
-            video: "videos/te.mp4"
-        },
-        '하***님': { isReady: false },
-        '르*님': {
-            img1: "images/le_1.png",
-            modalImg: "images/le_2.png",
-            video: "videos/le.mp4"
-        },
-        '만*님': {
-            img1: "images/man_1.png",
-            modalImg: "images/man_2.png",
-            video: "videos/man.mp4"
-        },
-        '위**님': {
-            img1: "images/wi_1.png",
-            modalImg: "images/wi_2.png",
-            video: "videos/wi.mp4"
-        },
-        '쿠*님': {
-            img1: "images/ku_1.png",
-            video: "videos/ku.mp4"
-        },
-        '이누형님': {
-            img1: "images/inu_1.png",
-            video: "videos/inu.mp4"
-        },
-        '해*님': {
-            img1: "images/hae_1.png",
-            video: "videos/hae.mp4"
-        },
-        '송워량님': {
-            img1: "images/song_1.png",
-            video: "videos/song.mp4"
-        },
-        '단망찌님': {
-            img1: "images/dan_1.png",
-            video: "videos/dan.mp4"
-        },
-        '챠코야님': {
-            img1: "images/chako_1.png",
-            video: "videos/chako.mp4"
-        },
-        '요*님': {
-            img1: "images/yo_1.png",
-            video: "videos/yo.mp4"
-        }
-    };
-
     function updateView(title, element) {
         document.getElementById('detailTitle').innerText = title;
         const mediaViewer = document.getElementById('mediaViewer');
-        const data = portfolioData[title];
 
-        if (!data || data.isReady === false) {
+        if (title === '만*님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549603342877982791/1.png?ex=6aac9d93&is=6aab4c13&hm=697b438d00ca42f0630cccfa1a774b1f47efbb81c4ec209a8e6ec49112aa236a&";
+            const modalImg = "https://cdn.discordapp.com/attachments/1301188250760777728/1549601304094187610/2.png?ex=6aac9bad&is=6aab4a2d&hm=3bb00dd2113abaab49a15f0905dfab4576d1e38bb44260ba970cc9ab8ebd3e45&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549602763330027621/53ae4033d3b5fd40.mp4?ex=6aac9d09&is=6aab4b89&hm=245c784854dc23f7e42aa0e21f419b5518b09bb0a25f18ae40fc628f29904fd6&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" referrerpolicy="no-referrer" onclick="openModal('${modalImg}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '요코링님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549377598587674695/316fe3510a3c10e7.png?ex=6aac7415&is=6aab2295&hm=ca49ccc1cc26afda6e71f71a57032322d8c0cecde54058a8bf840d659e076969&";
+            const modalImg = "https://cdn.discordapp.com/attachments/1301188250760777728/1549599579517755472/2.png?ex=6aac9a11&is=6aab4891&hm=f03896f7e72f8a630b29a9408e1fe7c3c5fd7d95ba5fc243c0b15f67fc16658b&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549377588315561984/d5446f0d16894bae.mp4?ex=6aac7413&is=6aab2293&hm=3d98d884050548a34052ee9e945da0a383b4ed7a0a28fbdee09f52f0c012a200&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" referrerpolicy="no-referrer" onclick="openModal('${modalImg}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '르*님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549594844744126524/1.png?ex=6aac95a9&is=6aab4429&hm=a0384469b04c96840f843a8e122d33cbb1d09c6dab80857345a65bab53c85976&";
+            const modalImg = "https://cdn.discordapp.com/attachments/1301188250760777728/1549594858841317477/2.png?ex=6aac95ac&is=6aab442c&hm=716ef5349cbf98eb15ef4f3e12ecdd3b153876cb275152c73773dd8d6049c73b&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549594931247718410/65e0f74c4811da66.mp4?ex=6aac95bd&is=6aab443d&hm=5fb3e897823b5ade8111b8de60bdd9c709cfbaa4cb6f882b0aa273001004768b&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" referrerpolicy="no-referrer" onclick="openModal('${modalImg}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '위**님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549384878783594546/1.png?ex=6aac7add&is=6aab295d&hm=042c760f3cb5f64d803869817c9657a52b385b105cc38acddc2430b78b045c2e&";
+            const modalImg = "https://cdn.discordapp.com/attachments/1301188250760777728/1549384494669373470/2.png?ex=6aab2901&is=6aa9d781&hm=7945a3e426f6ded8f80d8fdbd5b9f5888f2918e8c6e30a6194fe9ca96cd97271&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549385635926646784/f07c45a29ad9fc93.mp4?ex=6aac7b91&is=6aab2a11&hm=58a6fefa1cdb17b5edba6802cc2ee3acbaa92ad002bf80575c5317f3a41b3876&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" referrerpolicy="no-referrer" onclick="openModal('${modalImg}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '루르님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549328932094877736/739c8130fa0c8b3e.png?ex=6aac46c2&is=6aaaf542&hm=46888adaedb759bb356a9b99b95bd7f50e878b94622d3cb56624385e13ee5a3e&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549328063362236487/ddbcf170ec367357.mp4?ex=6aaceeb3&is=6aab9d33&hm=0055373c5a24087d4f1d134d1fd0bd40c3e41237bc1fb22c6bb2da630ea389b7&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" referrerpolicy="no-referrer" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '태호님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549357691032571914/b51ce709408e7ef6.png?ex=6aac618b&is=6aab100b&hm=fcaafbad446b4f11b1bbed0ae24f7871b59740cb1beb49fd3fa255907169a1ef&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549357719604043856/bd877e2836d41bd9.mp4?ex=6aac6192&is=6aab1012&hm=56c635846d5c7f50eeae7593ddf02a1194a55b8543cdd995e66c65744b3fcdd0&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" referrerpolicy="no-referrer" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '테*님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549359518171926548/1bb5bbf0ae470ee2.png?ex=6aac633e&is=6aab11be&hm=3a7324f5533b5eb5cefb8e96400348862b70bd3f3db9dbecf8a6bd1db8e43269&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549359501415546880/423dc2e145843a85.mp4?ex=6aac633a&is=6aab11ba&hm=d3172429cbf0d5e28b612b9e69c9e5e1f9c3ff90542aded2b89b7ea99bd719e8&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" referrerpolicy="no-referrer" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '하***님') {
             mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item">이미지 준비 중</div><div class="dual-item">영상 준비 중</div></div>`;
-            return;
+        } else if (title === '쿠*님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549285922913128488/b820a9153fc23cbc.png?ex=6aacc774&is=6aab75f4&hm=9962042478e804e772a0f445b9c12baa0aef051db2fb8e82e773cc248fe62337&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549284741663162439/d8121ac8314871cd.mp4?ex=6aacc65a&is=6aab74da&hm=b91ee2af72bdf83b16260058fb03d04f0ec3b53c1861e0ccbda81a3972fbbbb4&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" referrerpolicy="no-referrer" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '이누형님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549286680656216064/104290585548406e.png?ex=6aacc829&is=6aab76a9&hm=b0e8fce5fe3aa3d6c831f063c7e3d0a6815e4de8e76de4bd474bb56841331369&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549286698498916382/34dd1f912e0d3033.mp4?ex=6aacc82d&is=6aab76ad&hm=dd04efe906301548b3c833d571edc1df3dee85d012210b20b0c2cd107372c7a0&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" referrerpolicy="no-referrer" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '해*님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549288784217120828/11739e292c787058.png?ex=6aacca1e&is=6aab789e&hm=1726adb8e80cd774818c450ecc0dcdaae9518b5d4ba24eec4b4d68c664532eac&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549288801690718218/83404166d7d79be3.mp4?ex=6aacca22&is=6aab78a2&hm=b47ce12bdcd4911b2354ec91995e0e17fe4563757d8b1f81c7dacf775d2d25c7&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" referrerpolicy="no-referrer" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '송워량님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549261621577384006/dfea00c69fdc5d8a.png?ex=6aaab692&is=6aa96512&hm=fd8dae6f5815c92a41e9bc102f949c3c7f08638a4849280da6fe8156d58f620d&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549261639889715350/9703cda8e41987a2.mp4?ex=6aaab696&is=6aa96516&hm=4fd9aae1b971dc738439390b6d5de2a10ea0c28b20e36af5014a34ae3c1782de&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="송워량님 이미지" referrerpolicy="no-referrer" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '단망찌님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549099810936856616/Untitled-1.png?ex=6aaac89f&is=6aa9771f&hm=36db12e79ea7484435cb72d6eba502b361a4606241c9511add68399e806a72a9&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549099534989131816/94acbb73c2042a21.mp4?ex=6aaac85e&is=6aa976de&hm=7f3642536ae76322108a12045778150bc995d2d02ae5908143ef95924c2e1afa&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="단망찌님 이미지" referrerpolicy="no-referrer" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '챠코야님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549255836365234297/Untitled-2.png?ex=6aaab12f&is=6aa95faf&hm=d98c97922cfa5b750f7e1b45425e09a5671c3496f87b9d67575dda97a2cc0857&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549255856246366228/0a297779cf1f0919.mp4?ex=6aaab133&is=6aa95fb3&hm=48cd54a2a9af76f72561e08e639217bbbfce1b949e8bdf0f916d6c144ac65802&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="챠코야님 이미지" referrerpolicy="no-referrer" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
+        } else if (title === '요*님') {
+            const img1 = "https://cdn.discordapp.com/attachments/1301188250760777728/1549259392845615145/fe55329e7752e7b4.png?ex=6aaab47f&is=6aa962ff&hm=579967e57c07e639d6f61355821cce4405782800cb6cbe1aac6896918a3366dd&";
+            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549259289275801670/3dfe6f24f7ecda37.mp4?ex=6aaab466&is=6aa962e6&hm=8f8f56bbebabb1a858b28ad24ec0cd9cffc8eb8aea9672bcd6b6fd01bbe59229&";
+            mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="요*님 이미지" referrerpolicy="no-referrer" onclick="openModal('${img1}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
         }
-
-        const modalTarget = data.modalImg || data.img1;
-        mediaViewer.innerHTML = `
-            <div class="dual-media-preview">
-                <div class="dual-item">
-                    <img src="${data.img1}" alt="이미지" onclick="openModal('${modalTarget}', 'img')">
-                </div>
-                <div class="dual-item">
-                    <video src="${data.video}" autoplay muted loop playsinline onclick="openModal('${data.video}', 'video')"></video>
-                </div>
-            </div>
-        `;
     }
 </script>
 
