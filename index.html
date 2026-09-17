@@ -592,7 +592,7 @@
         } else if (title === '테*님') {
             const img1 = "https://raw.githubusercontent.com/hingguri55/portfolio-assets/main/%ED%85%8C%EC%96%80.png";
             const modalImg = "https://raw.githubusercontent.com/hingguri55/portfolio-assets/main/%ED%85%8C%EC%96%80.png";
-            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549359501415546880/423dc2e145843a85.mp4?ex=6aab11ba&is=6aa9c03a&hm=9741c90411fd52e23ba8c366283bf0ebb61d5cb2fe7e1baaa195b2bdae842ee4&";
+            const videoUrl = getValidVideoUrl("https://github.com/hingguri55/portfolio-video4/blob/main/%ED%85%8C%EC%96%80.mp4");
             mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" referrerpolicy="no-referrer" onclick="openModal('${modalImg}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
         } else if (title === '하***님') {
             mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item">이미지 준비 중</div><div class="dual-item">영상 준비 중</div></div>`;
@@ -609,7 +609,7 @@
         } else if (title === '해*님') {
             const img1 = "https://raw.githubusercontent.com/hingguri55/portfolio-assets/main/%ED%95%B4%EA%B5%B0.png";
             const modalImg = "https://raw.githubusercontent.com/hingguri55/portfolio-assets/main/%ED%95%B4%EA%B5%B0.png";
-            const videoUrl = "https://cdn.discordapp.com/attachments/1301188250760777728/1549288801690718218/83404166d7d79be3.mp4?ex=6aaacfe2&is=6aa97e62&hm=8793d48d1e5d34a67d829f05b0ddcebef798cef81386454348f0cdb8e80f9828&";
+            const videoUrl = getValidVideoUrl("https://github.com/hingguri55/portfolio-video4/blob/main/%ED%95%B4%EA%B5%B0.mp4");
             mediaViewer.innerHTML = `<div class="dual-media-preview"><div class="dual-item"><img src="${img1}" alt="이미지" referrerpolicy="no-referrer" onclick="openModal('${modalImg}', 'img')"></div><div class="dual-item"><video src="${videoUrl}" autoplay muted loop playsinline referrerpolicy="no-referrer" onclick="openModal('${videoUrl}', 'video')"></video></div></div>`;
         } else if (title === '송워량님') {
             const img1 = "https://raw.githubusercontent.com/hingguri55/portfolio-assets/main/%EC%86%A1%EC%9B%8C%EB%9F%89.png";
